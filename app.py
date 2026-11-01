@@ -2,7 +2,7 @@
 import tempfile
 import streamlit as st
 
-from lecvyn import config, chunker, offtopic, llm, videos
+from lecvyn import config, chunker, offtopic, llm, videos, dashboard
 from lecvyn.store import ChunkStore
 
 st.set_page_config(page_title="LECVYN", page_icon="🎓", layout="wide")
@@ -65,8 +65,7 @@ if not chunks:
 kept = [c for c in chunks if c["on_topic"]]
 text = "\n".join(c["text"] for c in kept)
 store = ChunkStore(kept)
-m1, m2, m3 = st.columns(3)
-m1.metric("Chunks", len(chunks)); m2.metric("On-topic kept", len(kept)); m3.metric("Removed (off-topic)", len(chunks) - len(kept))
+dashboard.render(chunks, threshold)
 
 t_tr, t_notes, t_quiz, t_ask, t_vid = st.tabs(["Transcript", "Notes", "Quiz & Flashcards", "Ask a doubt", "Videos"])
 
