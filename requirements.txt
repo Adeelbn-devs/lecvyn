@@ -1,0 +1,8 @@
+streamlit>=1.35
+numpy
+faiss-cpu
+sentence-transformers
+groq
+requests
+python-dotenv
+faster-whisper   # optional: only for offline/local speech-to-text
